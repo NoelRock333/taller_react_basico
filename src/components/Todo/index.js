@@ -27,9 +27,9 @@ class Todo extends React.Component {
 
   handleInputChange = (index) =>  {
     let todoList = this.state.todoList;
-    todoList[index] = { ...todoList[index], done: !todoList[index].done }
-    this.setState({
-      todoList: todoList
+    this.setState(() => {
+      todoList[index] = { ...todoList[index], done: !todoList[index].done }
+      return { todoList: todoList }
     })
   }
 
@@ -50,7 +50,7 @@ class Todo extends React.Component {
     return (
       <div>
         <h2>Mi lista de cosas por hacer</h2>
-        {this.countUndone()}
+        <span>Tareas por hacer: </span><b>{this.countUndone()}</b>
         <form className="todo-form" onSubmit={this.onSubmit}>
           <input value={this.state.newItem} onChange={this.onChange} ref={(input) => { this.myInput = input; }}  />
           <button>Submit</button>
