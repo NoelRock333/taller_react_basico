@@ -49,6 +49,7 @@ class Todo extends React.Component {
   
     return (
       <div>
+        <button onClick={this.props.history.goBack}>Regresar</button>
         <h2>Mi lista de cosas por hacer</h2>
         <span>Tareas por hacer: </span><b>{this.countUndone()}</b>
         <form className="todo-form" onSubmit={this.onSubmit}>

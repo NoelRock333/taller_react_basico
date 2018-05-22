@@ -1,9 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-// import App from './App';
 import registerServiceWorker from './registerServiceWorker';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import App from './App';
 import Todo from './components/Todo';
 
-ReactDOM.render(<Todo />, document.getElementById('root'));
+// https://reacttraining.com/react-router/web/example/basic
+const MyClientRoutes = () => (
+  <Router>
+    <div>
+      <Route exact path="/" component={App} />
+      <Route path="/todo" component={Todo} />
+    </div>
+  </Router>
+)
+
+ReactDOM.render(<MyClientRoutes />, document.getElementById('root'));
 registerServiceWorker();
