@@ -1,4 +1,5 @@
 import React from 'react'
+import Item from './Item'
 
 class Todo extends React.Component {
   state = {
@@ -10,7 +11,10 @@ class Todo extends React.Component {
     event.preventDefault();
     if (this.state.newItem) {
       this.setState({ 
-        todoList: [...this.state.todoList, this.state.newItem],
+        todoList: [
+          ...this.state.todoList,
+          { text: this.state.newItem, done: false }
+        ],
         newItem: ''
       });
       this.myInput.focus();
@@ -21,14 +25,32 @@ class Todo extends React.Component {
     this.setState({ newItem: event.target.value });
   }
 
+  handleInputChange = (index) =>  {
+    let todoList = this.state.todoList;
+    todoList[index] = { ...todoList[index], done: !todoList[index].done }
+    this.setState({
+      todoList: todoList
+    })
+  }
+
+  countUndone = () => {
+    return this.state.todoList.reduce((a, b) => {
+      if (!b.done)
+        return a + 1
+      else 
+        return a;
+      }, 0)
+  }
+
   render() {
     const todoList = this.state.todoList.map((item, index) => {
-      return <li key={index}>{item}</li>
+      return <Item item={item} index={index} key={index} handleInputChange={this.handleInputChange} />
     });
   
     return (
       <div>
         <h2>Mi lista de cosas por hacer</h2>
+        {this.countUndone()}
         <form className="todo-form" onSubmit={this.onSubmit}>
           <input value={this.state.newItem} onChange={this.onChange} ref={(input) => { this.myInput = input; }}  />
           <button>Submit</button>
