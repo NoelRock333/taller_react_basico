@@ -42,11 +42,13 @@ class Todo extends React.Component {
       }, 0)
   }
 
+  itemsList = (item, index) => {
+    return <Item item={item} index={index} key={index} handleInputChange={this.handleInputChange} /> 
+  }
+
   render() {
-    const todoList = this.state.todoList.map((item, index) => {
-      return <Item item={item} index={index} key={index} handleInputChange={this.handleInputChange} />
-    });
-  
+    const todoList = this.state.todoList.map(this.itemsList);
+    
     return (
       <div>
         <button onClick={this.props.history.goBack}>Regresar</button>
