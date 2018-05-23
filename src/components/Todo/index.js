@@ -52,23 +52,28 @@ class Todo extends React.Component {
     
     return (
       <div>
-        <button onClick={this.props.history.goBack}>Regresar</button>
+        <button onClick={this.props.history.goBack}>&lt; Regresar</button>
+        <AppContext.Consumer>
+            {(context) => (
+              <div>
+                <span>{context.number}</span>
+                <button onClick={context.inc}>INC</button>
+              </div>
+            )}
+        </AppContext.Consumer>
         <h2>Mi lista de cosas por hacer</h2>
         <span>Tareas por hacer: </span><b>{this.countUndone()}</b>
-        <form className="todo-form" onSubmit={this.onSubmit}>
-          <input value={this.state.newItem} onChange={this.onChange} ref={(input) => { this.myInput = input; }}  />
-          <button>Submit</button>
+        <form className="todo-form input-group" onSubmit={this.onSubmit}>
+          <input
+            className="input-group-prepend"
+            value={this.state.newItem}
+            onChange={this.onChange}
+            ref={(input) => { this.myInput = input; }}
+          />
+          <button className="btn btn-success">Submit</button>
         </form>
         <ul>
           {todoList}
-          <AppContext.Consumer>
-              {(context) => (
-                <div>
-                  <span>{context.number}</span>
-                  <button onClick={context.inc}>INC</button>
-                </div>
-              )}
-          </AppContext.Consumer>
         </ul>
       </div>
     )
