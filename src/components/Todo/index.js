@@ -1,5 +1,6 @@
 import React from 'react'
 import Item from './Item'
+import { AppContext } from '../../AppContext';
 
 class Todo extends React.Component {
   state = {
@@ -60,6 +61,14 @@ class Todo extends React.Component {
         </form>
         <ul>
           {todoList}
+          <AppContext.Consumer>
+              {(context) => (
+                <div>
+                  <span>{context.number}</span>
+                  <button onClick={context.inc}>INC</button>
+                </div>
+              )}
+          </AppContext.Consumer>
         </ul>
       </div>
     )
