@@ -1,5 +1,6 @@
 import React from 'react';
 import Api from '../../utils/api';
+import Item from './Item';
 
 class Notes extends React.Component {
   state = {
@@ -34,6 +35,17 @@ class Notes extends React.Component {
     });
   }
 
+  deleteNote = (event) => {
+    event.preventDefault();
+    let id = event.target.dataset.id;
+    Api.delete(`/notes/${id}.json`)
+      .then(data => {
+        this.setState({
+          notes: this.state.notes.filter(item => `${item.id}` !== `${id}`)
+        })
+      })
+  }
+
   render() {
     return (
       <div className="container">
@@ -56,11 +68,7 @@ class Notes extends React.Component {
         <div>
           {this.state.notes.map(note => {
             return (
-              <div key={note.id}>
-                <b>titulo: </b><span>{note.title}</span>
-                <br/>
-                <b>descripción: </b><span>{note.description}</span>
-              </div>
+              <Item note={note} key={note.id} deleteNote={this.deleteNote} />
             ) 
           })}
         </div>

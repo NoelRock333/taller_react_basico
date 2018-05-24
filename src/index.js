@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 // import App from './App';
 import Todo from './components/Todo';
 import Notes from './components/Notes';
+import Note from './components/Note';
 import { AppProvider } from './AppContext';
 
 // https://reacttraining.com/react-router/web/example/basic
@@ -15,6 +16,7 @@ const MyClientRoutes = () => (
     <Router>
         <div>
           <Route exact path="/" component={Notes} />
+          <Route path="/note/:id" component={Note} />
           <Route path="/todo" component={Todo} />
         </div>
     </Router>
