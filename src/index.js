@@ -14,7 +14,7 @@ import { AppProvider } from './AppContext';
 const MyClientRoutes = () => (
   <AppProvider>
     <Router>
-        <div>
+        <div className="container">
           <Route exact path="/" component={Notes} />
           <Route path="/note/:id" component={Note} />
           <Route path="/todo" component={Todo} />

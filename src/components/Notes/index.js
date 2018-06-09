@@ -48,24 +48,34 @@ class Notes extends React.Component {
 
   render() {
     return (
-      <div className="container">
+      <div>
         <h1>Consumo de API</h1>
-        <form onSubmit={this.onSubmit}>
-          <input
-            type="text"
-            value={this.state.title}
-            placeholder="titulo"
-            onChange={(ev) => this.setState({ title: ev.target.value })}
-          />
-          <input
-            type="text"
-            value={this.state.description}
-            placeholder="descripcion"
-            onChange={(ev) => this.setState({ description: ev.target.value })}
-          />
-          <button className="btn btn-primary">Guardar</button>
-        </form>
-        <div>
+        <div className="row">
+          <form onSubmit={this.onSubmit} className="col-sm-5 mb-3">
+            <div className="form-group">
+              <input
+                type="text"
+                className="form-control"
+                value={this.state.title}
+                placeholder="Titulo"
+                onChange={(ev) => this.setState({ title: ev.target.value })}
+              />
+            </div>
+            <div className="form-group">
+              <textarea
+                type="text"
+                className="form-control"
+                value={this.state.description}
+                placeholder="Descripcion"
+                onChange={(ev) => this.setState({ description: ev.target.value })}
+              />
+            </div>
+            <div className="form-group">
+              <button className="btn btn-primary">Guardar</button>
+            </div>
+          </form>
+        </div>
+        <div className="list-group">
           {this.state.notes.map(note => {
             return (
               <Item note={note} key={note.id} deleteNote={this.deleteNote} />

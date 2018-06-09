@@ -51,8 +51,8 @@ class Todo extends React.Component {
     const todoList = this.state.todoList.map(this.itemsList);
     
     return (
-      <div>
-        <button onClick={this.props.history.goBack}>&lt; Regresar</button>
+      <div className="">
+        {/* <button onClick={this.props.history.goBack}>&lt; Regresar</button>
         <AppContext.Consumer>
             {(context) => (
               <div>
@@ -60,7 +60,7 @@ class Todo extends React.Component {
                 <button onClick={context.inc}>INC</button>
               </div>
             )}
-        </AppContext.Consumer>
+        </AppContext.Consumer> */}
         <h2>Mi lista de cosas por hacer</h2>
         <span>Tareas por hacer: </span><b>{this.countUndone()}</b>
         <form className="todo-form input-group" onSubmit={this.onSubmit}>
@@ -72,9 +72,13 @@ class Todo extends React.Component {
           />
           <button className="btn btn-success">Submit</button>
         </form>
-        <ul>
-          {todoList}
-        </ul>
+        <div className="row mt-3">
+          <div className="col-sm-3">
+            <ul className="list-group">
+              {todoList}
+            </ul>
+          </div>
+        </div>
       </div>
     )
   }
